@@ -9,6 +9,8 @@ registered_faces = {}
 initial_registered_images = [
     {"name": "Joao Pedro", "image": "rosto1.jpg"},
     {"name": "Vitor Ramos", "image": "rosto2.jpg"},
+    {"name": "Rafael", "image": "rosto3.jpg"},
+    {"name": "Pedro Peres", "image": "rosto4.jpg"},
 ]
 
 for entry in initial_registered_images:
