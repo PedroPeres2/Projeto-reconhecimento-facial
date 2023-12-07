@@ -2,10 +2,10 @@ import cv2
 import mediapipe as mp
 import face_recognition
 
-# Initialize an empty dictionary to store names and encodings
+# Inicializar um dicionário vazio para armazenar nomes e codificações
 registered_faces = {}
 
-# Load initial registered face images and get their encodings
+# Carregamos imagens dos nossos rosto  para registro
 initial_registered_images = [
     {"name": "Joao Pedro", "image": "rosto1.jpg"},
     {"name": "Vitor Ramos", "image": "rosto2.jpg"},
@@ -18,10 +18,10 @@ for entry in initial_registered_images:
     encoding = face_recognition.face_encodings(image)[0]
     registered_faces[entry["name"]] = encoding
 
-# Initialize OpenCV, Mediapipe, and Face Recognition
+# Inicializamos o OpenCV, Mediapipe e Face Recognition
 webcam = cv2.VideoCapture(1)
 face_detection = mp.solutions.face_detection
-reconhecedor_rostos = face_detection.FaceDetection()  # Move this line outside of the loop
+reconhecedor_rostos = face_detection.FaceDetection()  
 drawing_utils = mp.solutions.drawing_utils
 
 def recognize_face(face_image):
@@ -30,10 +30,10 @@ def recognize_face(face_image):
     if len(unknown_encodings) > 0:
         recognized_names = []
         for unknown_encoding in unknown_encodings:
-            # Compare the unknown face encoding with the registered faces
+            # Compararamos a codificação com as faces desconhecidas com as faces registradas
             results = face_recognition.compare_faces(list(registered_faces.values()), unknown_encoding, tolerance=0.6)
 
-            # If a match is found, add the corresponding name to recognized_names
+            
             if True in results:
                 matched_name = next(name for name, result in zip(registered_faces.keys(), results) if result)
                 recognized_names.append(matched_name)
